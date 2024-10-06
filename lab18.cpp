@@ -12,6 +12,8 @@ struct Node
 
 
 int main(int argc, char const *argv[]){
-    cout << "test";
     return 0;
 }
+
+//Returns Movie at given index
+
