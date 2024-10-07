@@ -12,7 +12,7 @@ struct Movie
 
 };
 
-
+// Function headers
 Movie* build();
 void print(Movie*);
 float average(Movie*);
@@ -25,6 +25,7 @@ int main(int argc, char const *argv[]){
     return 0;
 }
 
+// Builds a movie from use input
 Movie* build(){
     char anotherReview = 'y';
     int headTail = 0;
@@ -37,6 +38,7 @@ Movie* build(){
     cout << "\t[2] New nodes are added at the tail of the linked list" << endl;
     cin >> headTail;
 
+    // User validation
     while(headTail < 1 || headTail > 2){
         cout << "Invalid input: You have to input 1 or 2";
         cout << "Which linked list method should we use?" << endl;
@@ -53,6 +55,8 @@ Movie* build(){
         // Gets the review rating and checks if its in range
         cout << "Enter review rating 0-5: ";
         cin >> rating;
+
+        // User validation
         while (rating > 5 || rating < 0){
             cout << "Review must be between 0-5";
             cout << "Enter review rating 0-5: ";
@@ -68,12 +72,14 @@ Movie* build(){
 
         Movie *temp = new Movie();
 
+        // Creates our temporary movie object to be appended
         temp->comments = comments;
         temp->rating = rating;
         temp->next = nullptr;
 
-
+        // Checks whether to append to the end or the begining
         if(headTail == 1){
+            // Checks if the head is empty
             if(!head){
                 head = temp;
                 current = head;
@@ -85,8 +91,6 @@ Movie* build(){
             temp->next = head;
             head = temp;
         }
-
-        
 
         cout << "Enter another input? Y/N: ";
         cin >> anotherReview;
@@ -100,6 +104,7 @@ void print(Movie* head){
     float ave = average(head);
     int count = 1;
 
+    // Prints review
     while(head){
         cout << "\t> Review #" << count << ": " << head->rating  << ": " << head->comments << endl;
         head = head->next;
