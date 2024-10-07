@@ -16,8 +16,6 @@ struct Movie
 Movie* build();
 void print(Movie*);
 float average(Movie*);
-void addTail(Movie*, Movie*);
-void addHead(Movie*, Movie*, Movie*);
 
 int main(int argc, char const *argv[]){
 
@@ -38,6 +36,14 @@ Movie* build(){
     cout << "\t[1] New nodes are added at the head of the linked list" << endl;
     cout << "\t[2] New nodes are added at the tail of the linked list" << endl;
     cin >> headTail;
+
+    while(headTail < 1 || headTail > 2){
+        cout << "Invalid input: You have to input 1 or 2";
+        cout << "Which linked list method should we use?" << endl;
+        cout << "\t[1] New nodes are added at the head of the linked list" << endl;
+        cout << "\t[2] New nodes are added at the tail of the linked list" << endl;
+        cin >> headTail;
+    }
 
     // Check's if the user want's to continue
     while(tolower(anotherReview) != 'n'){
@@ -66,11 +72,21 @@ Movie* build(){
         temp->rating = rating;
         temp->next = nullptr;
 
+
         if(headTail == 1){
-            void addHead(Movie* head, Movie* current, Movie* temp);
+            if(!head){
+                head = temp;
+                current = head;
+            }else{
+                current->next = temp;
+                current = current->next;
+            }
         }else{
-            void addTail(Movie* head, Movie* temp);
+            temp->next = head;
+            head = temp;
         }
+
+        
 
         cout << "Enter another input? Y/N: ";
         cin >> anotherReview;
@@ -78,21 +94,7 @@ Movie* build(){
     return head;
 }
 
-void addHead(Movie* head, Movie* current, Movie* temp){
-    // Checks if its the first node
-    if(!head){
-        head = temp;
-        current = head;
-    }else{
-        current->next = temp;
-        current = current->next;
-    }
-}
 
-void addTail(Movie* head, Movie* temp){
-    temp->next = head;
-    head = temp;
-}
 
 void print(Movie* head){
     float ave = average(head);
@@ -101,6 +103,7 @@ void print(Movie* head){
     while(head){
         cout << "\t> Review #" << count << ": " << head->rating  << ": " << head->comments << endl;
         head = head->next;
+        count++;
     }
     cout << "\t> Average: " << ave << endl;
 }
@@ -110,7 +113,6 @@ float average(Movie* head){
     int count = 0;
 
     while(head){
-        cout << "success" << endl;
         sum += head->rating;
         head = head->next;
         count++;
