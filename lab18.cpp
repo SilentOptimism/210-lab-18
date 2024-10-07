@@ -26,6 +26,8 @@ int main(int argc, char const *argv[]){
 }
 
 // Builds a movie from use input
+// Inputs: None
+// Returns: Returns an init movie with user inputs
 Movie* build(){
     char anotherReview = 'y';
     int headTail = 0;
@@ -100,6 +102,8 @@ Movie* build(){
 
 
 
+// Prints film
+// Inputs: movie head
 void print(Movie* head){
     float ave = average(head);
     int count = 1;
